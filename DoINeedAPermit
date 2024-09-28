@@ -1,0 +1,42 @@
+document.getElementById('submitBtn').addEventListener('click', determinePermit);
+
+function determinePermit() {
+  const projectType = document.getElementById('projectType').value;
+  const nearHighway = document.getElementById('nearHighway')?.value;
+  const eventSize = document.getElementById('eventSize')?.value;
+  let result = '';
+
+  if (projectType === 'road' && nearHighway === 'yes') {
+    result = `
+      For road work near a state highway, please contact the Idaho Transportation Department (ITD):
+      <br>600 W Prairie Ave. Coeur d’Alene, ID 83815
+      <br>208-772-1297 | <a href="http://www.itd.idaho.gov" target="_blank">www.itd.idaho.gov</a>
+    `;
+  } else if (projectType === 'road' && nearHighway === 'no') {
+    result = `
+      For road work not near a state highway, please contact Bonner County Road & Bridge:
+      <br>1500 Hwy 2 Ste. 101 Sandpoint, ID 83864
+      <br>208-255-5681 | <a href="http://www.bonnercountyid.gov/departments/roadbridge" target="_blank">www.bonnercountyid.gov</a>
+    `;
+  } else if (projectType === 'event' && eventSize === 'yes') {
+    result = `
+      For events on public roads, you need an event permit. Contact Bonner County Road & Bridge for more information.
+      <br>1500 Hwy 2 Ste. 101 Sandpoint, ID 83864
+      <br>208-255-5681 | <a href="http://www.bonnercountyid.gov/departments/roadbridge" target="_blank">www.bonnercountyid.gov</a>
+    `;
+  } else if (projectType === 'utility') {
+    result = `
+      For utility work within state or county right-of-way, permits are required. Contact the appropriate agency based on the location.
+    `;
+  } else if (projectType === 'construction') {
+    result = `
+      For construction permits, please contact the Idaho Division of Occupational and Professional Licenses (DOPL):
+      <br>1250 Ironwood Dr. Ste. 220 Coeur d’Alene, ID 83814
+      <br>208-334-3950 | <a href="https://dopl.idaho.gov" target="_blank">dopl.idaho.gov</a>
+    `;
+  } else {
+    result = 'Please contact the appropriate agency for your project type. Refer to the brochure for more details.';
+  }
+
+  document.getElementById('result').innerHTML = result;
+}
